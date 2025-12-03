@@ -1,25 +1,33 @@
 package lojaAPI;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class Produto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_produto;
+	private int id_produto;
 	private String nome;
 	private String descricao;
-	private int preco;
+	private double preco;
 	private int estoque;
 	
-	public Long getId_produto() {
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
+	
+	public int getId_produto() {
 		return id_produto;
 	}
-	public void setId_produto(Long id_produto) {
+	public void setId_produto(int id_produto) {
 		this.id_produto = id_produto;
 	}
 	public String getNome() {
@@ -34,10 +42,10 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public int getPreco() {
+	public double getPreco() {
 		return preco;
 	}
-	public void setPreco(int preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 	public int getEstoque() {
@@ -46,8 +54,12 @@ public class Produto {
 	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
-	
-	
+	public Pedido getPedido() {
+		return pedido;
+	}
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
 	
 	
 
